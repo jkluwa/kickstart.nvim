@@ -715,6 +715,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'clangd',
         'clang-format',
+        'codelldb',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
