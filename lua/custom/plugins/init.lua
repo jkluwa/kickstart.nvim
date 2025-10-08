@@ -38,11 +38,22 @@ return {
 
       dap.configurations.cpp = {
         {
-          name = 'Launch file',
+          name = 'Launch C++ program (with make)',
           type = 'lldb',
           request = 'launch',
           program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            local result = vim.fn.system 'make'
+
+            -- Print make output (optional)
+            print(result)
+
+            if vim.v.shell_error ~= 0 then
+              error '❌ Build failed! Check your Makefile.'
+            else
+              print '✅ Build successful!'
+            end
+
+            return vim.fn.getcwd() .. '/main'
           end,
           cwd = '${workspaceFolder}',
           stopOnEntry = false,
