@@ -57,6 +57,7 @@ return {
           end,
           cwd = '${workspaceFolder}',
           stopOnEntry = false,
+          console = 'internalTerminal',
           args = {},
         },
       }

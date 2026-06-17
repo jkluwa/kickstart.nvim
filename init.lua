@@ -673,6 +673,7 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         pyright = {},
+
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -1018,3 +1019,13 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'cs',
+  callback = function()
+    vim.lsp.start {
+      name = 'csharp_ls',
+      cmd = { 'csharp-ls' },
+      root_dir = vim.fs.root(0, { '.sln', '.git' }),
+    }
+  end,
+})
